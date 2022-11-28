@@ -16,13 +16,40 @@ function getComputerChoice () {
 function playRound(playerSelection, computerSelection) {
     playerSelection = playerSelection.toUpperCase();
     
+    let winStatement = "You win. " + playerSelection + " beats " + computerSelection  + ".";
+    let loseStatement = "You lose. " + computerSelection + " beats " + playerSelection + ".";
+
     if (playerSelection == computerSelection) {
-        console.log("You tied fucking nerd.");
+        return("You tied nerd.");
+    } else {
+        if (playerSelection == "ROCK" && computerSelection == "SCISSORS") {
+            return (winStatement);
+        } else if (playerSelection == "ROCK" && computerSelection == "PAPER") {
+            return (loseStatement);
+        } else if (playerSelection == "PAPER" && computerSelection == "SCISSORS") {
+            return (loseStatement);
+        }
+        else if (playerSelection == "PAPER" && computerSelection == "ROCK") {
+            return (winStatement);
+        }
+        else if (playerSelection == "SCISSORS" && computerSelection == "ROCK") {
+            return (loseStatement);
+        }
+        else if (playerSelection == "SCISSORS" && computerSelection == "PAPER") {
+            return (winStatement);
+        } else {
+            return ('Unknown Input.');
+        }
     }
-    console.log("Player: " + playerSelection);
-    console.log("Computer: " + computerSelection);
   }
    
   const playerSelection = "rock";
   const computerSelection = getComputerChoice();
-  console.log(playRound(playerSelection, computerSelection));
+
+  function game() {
+    for (let i = 1; i < 6; i++) {
+    const playerSelection = window.prompt("Enter ROCK, PAPER, or SCISSORS.");
+    console.log(playRound(playerSelection,computerSelection));
+    }
+  }
+  console.log(game());
