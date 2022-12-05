@@ -46,10 +46,15 @@ function playRound(playerSelection, computerSelection) {
   const playerSelection = "rock";
   const computerSelection = getComputerChoice();
 
+  
   function game() {
-    for (let i = 1; i < 6; i++) {
+    /*for (let i = 1; i < 6; i++) {
     const playerSelection = window.prompt("Enter ROCK, PAPER, or SCISSORS.");
     console.log(playRound(playerSelection,computerSelection));
-    }
+    } */
+window.addEventListener('click', function (e) {
+    const playerSelection = document.querySelector(`button[id="${e.target.id}"]`).id;
+})
+
   }
   console.log(game());
