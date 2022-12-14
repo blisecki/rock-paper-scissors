@@ -1,4 +1,7 @@
 
+  let playerScore = 0;
+  let computerScore = 0;
+
 function getComputerChoice () {
     let randomNumber = Math.floor(Math.random() * 3);
     let outcome;
@@ -13,6 +16,14 @@ function getComputerChoice () {
     return outcome;
 }
 
+function checkScore(){
+    if (computerScore == 5) {
+        document.getElementById("winner").innerHTML = "Computer wins!";
+    } else if (playerScore == 5) {
+        document.getElementById("winner").innerHTML = "You win!";
+    }
+}
+
 function playRound(playerSelection, computerSelection) {
     playerSelection = playerSelection.toUpperCase();
     
@@ -20,41 +31,60 @@ function playRound(playerSelection, computerSelection) {
     let loseStatement = "You lose. " + computerSelection + " beats " + playerSelection + ".";
 
     if (playerSelection == computerSelection) {
-        return("You tied nerd.");
+        document.getElementById("results").innerHTML = "You tied nerd.";
+        return;
     } else {
         if (playerSelection == "ROCK" && computerSelection == "SCISSORS") {
+            document.getElementById("results").innerHTML = winStatement;
+            playerScore++;
+            document.getElementById("player").innerHTML = playerScore;
             return (winStatement);
         } else if (playerSelection == "ROCK" && computerSelection == "PAPER") {
+            document.getElementById("results").innerHTML = loseStatement;
+            computerScore++;
+            document.getElementById("computer").innerHTML = computerScore;
             return (loseStatement);
         } else if (playerSelection == "PAPER" && computerSelection == "SCISSORS") {
+            document.getElementById("results").innerHTML = loseStatement;
+            computerScore++;
+            document.getElementById("computer").innerHTML = computerScore;
             return (loseStatement);
         }
         else if (playerSelection == "PAPER" && computerSelection == "ROCK") {
+            document.getElementById("results").innerHTML = winStatement;
+            playerScore++;
+            document.getElementById("player").innerHTML = playerScore;
             return (winStatement);
         }
         else if (playerSelection == "SCISSORS" && computerSelection == "ROCK") {
+            document.getElementById("results").innerHTML = loseStatement;
+            computerScore++;
+            document.getElementById("computer").innerHTML = computerScore;
             return (loseStatement);
         }
         else if (playerSelection == "SCISSORS" && computerSelection == "PAPER") {
+            document.getElementById("results").innerHTML = winStatement;
+            playerScore++;
+            document.getElementById("player").innerHTML = playerScore;
             return (winStatement);
         } else {
             return ('Unknown Input.');
         }
     }
-  }
-   
-  const playerSelection = "rock";
-  const computerSelection = getComputerChoice();
 
-  
+    
+  }
+
+
   function game() {
-    /*for (let i = 1; i < 6; i++) {
-    const playerSelection = window.prompt("Enter ROCK, PAPER, or SCISSORS.");
-    console.log(playRound(playerSelection,computerSelection));
-    } */
+
+
 window.addEventListener('click', function (e) {
-    const playerSelection = document.querySelector(`button[id="${e.target.id}"]`).id;
-})
+    let computerSelection = getComputerChoice();
+    let playerSelection = document.querySelector(`button[id="${e.target.id}"]`).id.toUpperCase();
+    playRound(playerSelection, computerSelection);
+    checkScore();
+});
 
   }
   console.log(game());
